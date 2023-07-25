@@ -1,7 +1,7 @@
-import { IsNotEmpty} from "class-validator";
+import { IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CreateUserBody{
+export class CreateUserBody {
     @ApiProperty({ required: true })
     @IsNotEmpty()
     name: string;
@@ -9,7 +9,7 @@ export class CreateUserBody{
     @ApiProperty({ required: true })
     @IsNotEmpty()
     email: string;
-  
+
     @ApiProperty({ required: true })
     @IsNotEmpty()
     password: string;

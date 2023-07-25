@@ -9,15 +9,14 @@ import { JwtModule } from './infra/services/jwt/jwt.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({ ...config, autoLoadEntities: true }),
-    HttpModule,
-    DatabaseModule,
-    LoggerModule,
-    BcryptModule,
-    JwtModule,
-    ExceptionsModule,
-  ],
-
+    imports: [
+        TypeOrmModule.forRoot({ ...config, autoLoadEntities: true }),
+        HttpModule,
+        DatabaseModule,
+        LoggerModule,
+        BcryptModule,
+        JwtModule,
+        ExceptionsModule,
+    ],
 })
 export class AppModule {}

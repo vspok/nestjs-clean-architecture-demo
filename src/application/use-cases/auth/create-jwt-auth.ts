@@ -7,14 +7,10 @@ export class CreateJWTAuth {
     constructor(private readonly jwtService: IJwtService) {}
 
     async execute(user: UserModel): Promise<string> {
-        const {
-            email,
-            id,
-            name,
-        } = user;
+        const { email, id, name } = user;
 
         const token = this.jwtService.createToken(
-            { name, email, id},
+            { name, email, id },
             process.env.JWT_SECRET,
             '4h',
         );

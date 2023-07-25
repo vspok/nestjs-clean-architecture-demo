@@ -4,18 +4,16 @@ import { IUserRepository } from 'src/domain/repositories/user-repository';
 
 @Injectable()
 export class SetUserRequestAuth {
-    constructor(
-        private userRepository: IUserRepository,
-    ) {}
+    constructor(private userRepository: IUserRepository) {}
 
     async execute(req: Request, userId: number) {
         try {
-            const user = await this.userRepository.findOne({id: userId})
+            const user = await this.userRepository.findOne({ id: userId });
             if (user) {
                 req['user'] = user; // DEFINE USUARIO DA REQUEST
             }
         } catch (error) {
-            throw new UnauthorizedException(error)
+            throw new UnauthorizedException(error);
         }
     }
 }

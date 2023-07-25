@@ -6,15 +6,11 @@ import { UserModel } from 'src/domain/models/user';
 export class ResetJWTAuth {
     constructor(private readonly jwtService: IJwtService) {}
 
-    async execute(user:UserModel): Promise<string> {
-        const {
-            email,
-            id,
-            name,
-        } = user;
+    async execute(user: UserModel): Promise<string> {
+        const { email, id, name } = user;
 
         const token = this.jwtService.createToken(
-            {name, email, id},
+            { name, email, id },
             process.env.JWT_SECRET,
             '30d',
         );

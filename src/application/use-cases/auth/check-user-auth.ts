@@ -11,7 +11,7 @@ interface LoginAuthRequest {
 
 interface LoginAuthResponse {
     user: UserModel;
-};
+}
 
 @Injectable()
 export class CheckUserAuth {
@@ -34,6 +34,6 @@ export class CheckUserAuth {
             return;
         }
 
-        return {user};
+        return { user };
     }
 }

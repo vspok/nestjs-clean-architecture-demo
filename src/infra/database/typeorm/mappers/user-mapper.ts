@@ -1,9 +1,8 @@
-import { UserModel } from "src/domain/models/user";
-import { UserEntity } from "../entities/user.entity";
+import { UserModel } from 'src/domain/models/user';
+import { UserEntity } from '../entities/user.entity';
 
-export class UserMapper{
-
-    static toDatabase(user: UserModel):UserEntity{
+export class UserMapper {
+    static toDatabase(user: UserModel): UserEntity {
         const userEntity: UserEntity = new UserEntity();
 
         userEntity.id = user.id;

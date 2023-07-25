@@ -26,7 +26,7 @@ export class LoginAuth {
     ) {}
 
     async execute(request: LoginAuthRequest): Promise<LoginAuthResponse> {
-        const {user} = await this.checkUserAuth.execute(request);
+        const { user } = await this.checkUserAuth.execute(request);
 
         if (!user) {
             throw new UnauthorizedException(
@@ -39,6 +39,6 @@ export class LoginAuth {
 
         this.logger.log('LoginAuth execute', 'New auth have been logind');
 
-        return { token, refreshToken , user };
+        return { token, refreshToken, user };
     }
 }

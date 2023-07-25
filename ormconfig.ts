@@ -1,7 +1,9 @@
-import { DataSourceOptions } from "typeorm";
-import * as dotenv from 'dotenv'
+import { DataSourceOptions } from 'typeorm';
+import * as dotenv from 'dotenv';
 
-dotenv.config({ path: process.env.NODE_ENV == "production" ? ".env.production" : ".env" })
+dotenv.config({
+    path: process.env.NODE_ENV == 'production' ? '.env.production' : '.env',
+});
 const booleanString = (word: any) => {
     switch (String(word).toLowerCase().trim()) {
         case 'yes':
@@ -16,8 +18,8 @@ const booleanString = (word: any) => {
         default:
             return Boolean(word);
     }
-}
-export const config:DataSourceOptions = {
+};
+export const config: DataSourceOptions = {
     type: 'mysql',
     host: process.env.DB_HOST || 'localhost',
     port: Number(process.env.DB_PORT) || 3306,
@@ -29,4 +31,4 @@ export const config:DataSourceOptions = {
     logging: booleanString(process.env.BD_LOGGING),
     timezone: 'Z',
     charset: 'utf8mb4',
-}
+};
