@@ -4,6 +4,13 @@ import { UsersController } from "./controllers/user.controller";
 import { CreateUser } from "src/application/use-cases/user/create-user";
 import { LoggerModule } from "../services/logger/logger.module";
 import { BcryptModule } from "../services/bcrypt/bcrypt.module";
+import { CheckJWTAuth } from "src/application/use-cases/auth/check-jwt-auth";
+import { JwtModule } from "../services/jwt/jwt.module";
+import { SetUserRequestAuth } from "src/application/use-cases/auth/set-user-request-auth";
+import { ResetJWTAuth } from "src/application/use-cases/auth/reset-jwt-auth";
+import { LoginAuth } from "src/application/use-cases/auth/login-auth";
+import { CreateJWTAuth } from "src/application/use-cases/auth/create-jwt-auth";
+import { CheckUserAuth } from "src/application/use-cases/auth/check-user-auth";
 
 const USE_CASES_USER = [
     CreateUser,
@@ -13,12 +20,20 @@ const USE_CASES_USER = [
     // FindManyUser,
     // FindAllUser,
 ]
-
+const USE_CASES_AUTH = [
+    CheckJWTAuth,
+    CheckUserAuth,
+    CreateJWTAuth,
+    SetUserRequestAuth,
+    ResetJWTAuth,
+    LoginAuth,
+]
 @Module({
-    imports:[DatabaseModule, LoggerModule, BcryptModule],
+    imports:[DatabaseModule, LoggerModule, BcryptModule,JwtModule],
     controllers:[UsersController],
     providers:[
         ...USE_CASES_USER,
+        ...USE_CASES_AUTH,
     ]
 })
 

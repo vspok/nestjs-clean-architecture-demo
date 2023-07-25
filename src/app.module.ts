@@ -17,6 +17,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     BcryptModule,
     JwtModule,
     ExceptionsModule,
-  ]
+  ],
+
 })
 export class AppModule {}

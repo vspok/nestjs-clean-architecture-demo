@@ -2,7 +2,21 @@ import { DataSourceOptions } from "typeorm";
 import * as dotenv from 'dotenv'
 
 dotenv.config({ path: process.env.NODE_ENV == "production" ? ".env.production" : ".env" })
-
+const booleanString = (word: any) => {
+    switch (String(word).toLowerCase().trim()) {
+        case 'yes':
+        case 'true':
+        case '1':
+            return true;
+        case 'no':
+        case 'false':
+        case '0':
+        case null:
+            return false;
+        default:
+            return Boolean(word);
+    }
+}
 export const config:DataSourceOptions = {
     type: 'mysql',
     host: process.env.DB_HOST || 'localhost',
@@ -11,8 +25,8 @@ export const config:DataSourceOptions = {
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_DATABASE || 'generic_table',
     entities: [__dirname + 'src/infra/database/typeorm/entities/*{.ts,.js}'],
-    synchronize: true,
+    synchronize: booleanString(process.env.BD_SINCROZAR),
+    logging: booleanString(process.env.BD_LOGGING),
     timezone: 'Z',
     charset: 'utf8mb4',
-    logging: false,
 }
