@@ -8,7 +8,7 @@ export class SetUserRequestAuth {
 
     async execute(req: Request, userId: number) {
         try {
-            const user = await this.userRepository.findOne({ id: userId });
+            const user = await this.userRepository.findOne({ user_id: userId });
             if (user) {
                 req['user'] = user; // DEFINE USUARIO DA REQUEST
             }

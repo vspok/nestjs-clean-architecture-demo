@@ -3,7 +3,7 @@ import { UserModel } from 'src/domain/models/user';
 
 export class UserViewModel {
     @ApiProperty()
-    id: number;
+    user_id: number;
 
     @ApiProperty()
     name: string;
@@ -11,9 +11,13 @@ export class UserViewModel {
     @ApiProperty()
     email: string;
 
+    @ApiProperty()
+    phone: string;
+
     constructor(user: UserModel) {
-        this.id = user.id;
+        this.user_id = user.user_id;
         this.name = user.name;
+        this.phone = user.phone;
         this.email = user.email;
     }
 }

@@ -15,11 +15,7 @@ interface LoginAuthResponse {
 
 @Injectable()
 export class CheckUserAuth {
-    constructor(
-        private readonly logger: ILogger,
-        private userRepository: IUserRepository,
-        private readonly bcryptService: IBcryptService,
-    ) {}
+    constructor(private readonly logger: ILogger, private userRepository: IUserRepository, private readonly bcryptService: IBcryptService) {}
 
     async execute(request: LoginAuthRequest): Promise<LoginAuthResponse> {
         const { email, password } = request;

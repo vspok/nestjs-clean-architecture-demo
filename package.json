@@ -6,9 +6,11 @@
     "private": true,
     "license": "UNLICENSED",
     "scripts": {
+        "prebuild": "rimraf dist",
         "build": "nest build",
         "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-        "start": "nest start",
+        "prestart": "rimraf dist",
+        "start": "nest start --watch",
         "start:dev": "nest start --watch",
         "start:debug": "nest start --debug --watch",
         "start:prod": "node dist/main",

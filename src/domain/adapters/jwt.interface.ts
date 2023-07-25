@@ -1,17 +1,10 @@
 export interface IJwtServicePayload {
-    id: number;
+    user_id: number;
     email: string;
     name: string;
 }
 
 export abstract class IJwtService {
-    abstract checkToken(
-        token: string,
-        secret: string,
-    ): Promise<IJwtServicePayload>;
-    abstract createToken(
-        payload: IJwtServicePayload,
-        secret: string,
-        expiresIn: string,
-    ): string;
+    abstract checkToken(token: string, secret: string): Promise<IJwtServicePayload>;
+    abstract createToken(payload: IJwtServicePayload, secret: string, expiresIn: string): string;
 }

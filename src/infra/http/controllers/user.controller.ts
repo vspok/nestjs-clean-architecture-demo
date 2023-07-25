@@ -1,14 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
-import {
-    Body,
-    Delete,
-    Param,
-    Patch,
-    Post,
-    Put,
-    Query,
-    UseGuards,
-} from '@nestjs/common/decorators';
+import { Body, Delete, Param, Patch, Post, Put, Query, UseGuards } from '@nestjs/common/decorators';
 import { ApiExtraModels, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { UserViewModel } from '../view-models/user-view-model';
 import { CreateUser } from 'src/application/use-cases/user/create-user';

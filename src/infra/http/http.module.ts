@@ -11,6 +11,7 @@ import { ResetJWTAuth } from 'src/application/use-cases/auth/reset-jwt-auth';
 import { LoginAuth } from 'src/application/use-cases/auth/login-auth';
 import { CreateJWTAuth } from 'src/application/use-cases/auth/create-jwt-auth';
 import { CheckUserAuth } from 'src/application/use-cases/auth/check-user-auth';
+import { AuthsController } from './controllers/auth.controller';
 
 const USE_CASES_USER = [
     CreateUser,
@@ -20,17 +21,10 @@ const USE_CASES_USER = [
     // FindManyUser,
     // FindAllUser,
 ];
-const USE_CASES_AUTH = [
-    CheckJWTAuth,
-    CheckUserAuth,
-    CreateJWTAuth,
-    SetUserRequestAuth,
-    ResetJWTAuth,
-    LoginAuth,
-];
+const USE_CASES_AUTH = [CheckJWTAuth, CheckUserAuth, CreateJWTAuth, SetUserRequestAuth, ResetJWTAuth, LoginAuth];
 @Module({
     imports: [DatabaseModule, LoggerModule, BcryptModule, JwtModule],
-    controllers: [UsersController],
+    controllers: [UsersController, AuthsController],
     providers: [...USE_CASES_USER, ...USE_CASES_AUTH],
 })
 export class HttpModule {}

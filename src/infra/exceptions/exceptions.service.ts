@@ -1,14 +1,5 @@
-import {
-    BadRequestException,
-    ForbiddenException,
-    Injectable,
-    InternalServerErrorException,
-    UnauthorizedException,
-} from '@nestjs/common';
-import {
-    IException,
-    IFormatExceptionMessage,
-} from 'src/domain/exceptions/exceptions.iterface';
+import { BadRequestException, ForbiddenException, Injectable, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
+import { IException, IFormatExceptionMessage } from 'src/domain/exceptions/exceptions.iterface';
 
 @Injectable()
 export class ExceptionsService implements IException {

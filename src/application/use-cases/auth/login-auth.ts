@@ -29,10 +29,7 @@ export class LoginAuth {
         const { user } = await this.checkUserAuth.execute(request);
 
         if (!user) {
-            throw new UnauthorizedException(
-                'LoginAuth execute',
-                'Invalid Credentials',
-            );
+            throw new UnauthorizedException('LoginAuth execute', 'Invalid Credentials');
         }
         const token = await this.createJWTAuth.execute(user);
         const refreshToken = await this.resetJWTAuth.execute(user);
