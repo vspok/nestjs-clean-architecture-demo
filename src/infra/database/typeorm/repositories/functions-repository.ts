@@ -1,71 +1,71 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Brackets, Repository } from 'typeorm';
-import { UserEntity } from '../entities/user.entity';
-import { FilterUser, IUserRepository } from 'src/domain/repositories/user-repository';
-import { UserModel } from 'src/domain/models/user';
 import { IPaginator } from 'src/helpers/interfaces/paginator-response-interface';
 import { FiltroLimit } from 'src/helpers/interfaces/filter-options';
 import { snakeCase } from 'typeorm/util/StringUtils';
 import { PaginateCreate } from 'src/infra/common/utils/paginate-create';
+import { FilterFunction, IFunctionRepository } from 'src/domain/repositories/funtions-repository';
+import { FunctionEntity } from '../entities/functions.entity';
+import { FunctionModel } from 'src/domain/models/functions';
 
 @Injectable()
-export class UserRepository implements IUserRepository {
+export class FunctionRepository implements IFunctionRepository {
     constructor(
-        @InjectRepository(UserEntity)
-        private readonly userEntityRepository: Repository<UserEntity>,
+        @InjectRepository(FunctionEntity)
+        private readonly functionEntityRepository: Repository<FunctionEntity>,
     ) {}
-    async create(user: UserModel): Promise<UserModel> {
+    async create(_function: FunctionModel): Promise<FunctionModel> {
         try {
-            return await this.userEntityRepository
-                .save(user)
-                .then(async (userSaved) => {
-                    const userUpdated = await this.findOne({ user_id: userSaved.user_id });
-                    return userUpdated;
+            return await this.functionEntityRepository
+                .save(_function)
+                .then(async (functionSaved) => {
+                    const functionUpdated = await this.findOne({ function_id: functionSaved.function_id });
+                    return functionUpdated;
                 })
                 .catch((error) => {
                     throw new BadRequestException({
-                        descricao: 'Erro ao Create User! - 002',
+                        descricao: 'Erro ao Create Function! - 002',
                         ...error,
                     });
                 });
         } catch (error) {
             throw new BadRequestException({
-                descricao: 'Error Create User! - 001',
+                descricao: 'Error Create Function! - 001',
                 ...error,
             });
         }
     }
-    async update(userId: number, user: Partial<UserModel>): Promise<UserModel> {
+    async update(functionId: number, _function: Partial<FunctionModel>): Promise<FunctionModel> {
         try {
-            return await this.userEntityRepository
-                .save({ userId, ...user })
-                .then(async (userSaved) => {
-                    const userUpdated = await this.findOne({ user_id: userSaved.user_id });
-                    return userUpdated;
+            return await this.functionEntityRepository
+                .save({ functionId, ..._function })
+                .then(async (functionSaved) => {
+                    const functionUpdated = await this.findOne({ function_id: functionSaved.function_id });
+                    return functionUpdated;
                 })
                 .catch((error) => {
                     throw new BadRequestException({
-                        descricao: 'Error Update User! - 002',
+                        descricao: 'Error Update Function! - 002',
                         ...error,
                     });
                 });
         } catch (error) {
             throw new BadRequestException({
-                descricao: 'Error Create User! - 001',
+                descricao: 'Error Create Function! - 001',
                 ...error,
             });
         }
     }
-    delete(userId: number): Promise<void> {
+    delete(functionId: number): Promise<void> {
         throw new Error('Method not implemented.');
     }
-    async findOne(filter: Partial<UserModel>): Promise<UserModel> {
-        return await this.userEntityRepository.findOneBy(filter);
+    async findOne(filter: Partial<FunctionModel>): Promise<FunctionModel> {
+        return await this.functionEntityRepository.findOneBy(filter);
     }
-    findMany(filter: FilterUser): Promise<IPaginator<UserModel>> {
+    findMany(filter: FilterFunction): Promise<IPaginator<FunctionModel>> {
         try {
-            let queryBuilder = this.userEntityRepository.createQueryBuilder('user');
+            let queryBuilder = this.functionEntityRepository.createQueryBuilder('_function');
             let pageFiltro = 1,
                 limitFiltro: FiltroLimit = 10;
             if (filter) {
@@ -85,24 +85,24 @@ export class UserRepository implements IUserRepository {
                 if (text) {
                     queryBuilder = queryBuilder.andWhere(
                         new Brackets((qb) => {
-                            qb.orWhere('user.user_id LIKE :user_id_text', {
-                                user_id_text: '%' + text + '%',
+                            qb.orWhere('_function.function_id LIKE :function_id_text', {
+                                function_id_text: '%' + text + '%',
                             });
                         }),
                     );
                 }
             }
-            return PaginateCreate<UserEntity>(queryBuilder, pageFiltro, limitFiltro);
+            return PaginateCreate<FunctionEntity>(queryBuilder, pageFiltro, limitFiltro);
         } catch (error) {
             console.error(error);
             throw new BadRequestException({
-                descricao: 'Error findMany user! - 001',
+                descricao: 'Error findMany _function! - 001',
                 ...error,
             });
         }
     }
-    findAll(): Promise<UserModel[]> {
-        let queryBuilder = this.userEntityRepository.createQueryBuilder('user');
+    findAll(): Promise<FunctionModel[]> {
+        let queryBuilder = this.functionEntityRepository.createQueryBuilder('_function');
 
         return queryBuilder.getMany();
     }

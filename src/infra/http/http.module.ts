@@ -12,13 +12,17 @@ import { LoginAuth } from 'src/application/use-cases/auth/login-auth';
 import { CreateJWTAuth } from 'src/application/use-cases/auth/create-jwt-auth';
 import { CheckUserAuth } from 'src/application/use-cases/auth/check-user-auth';
 import { AuthsController } from './controllers/auth.controller';
+import { UpdateUser } from 'src/application/use-cases/user/update-user';
+import { DeleteUser } from 'src/application/use-cases/user/delete-user';
+import { FindManyUser } from 'src/application/use-cases/user/find-many-user';
+import { FindUser } from 'src/application/use-cases/user/find-user';
 
 const USE_CASES_USER = [
     CreateUser,
-    // UpdateUser,
-    // DeleteUser
-    // FindUser,
-    // FindManyUser,
+    UpdateUser,
+    DeleteUser,
+    FindUser,
+    FindManyUser,
     // FindAllUser,
 ];
 const USE_CASES_AUTH = [CheckJWTAuth, CheckUserAuth, CreateJWTAuth, SetUserRequestAuth, ResetJWTAuth, LoginAuth];
