@@ -10,6 +10,8 @@ import { UpdateUserBody } from '../dtos/update-user-body';
 import { FindManyUser } from 'src/application/use-cases/user/find-many-user';
 import { FindUser } from 'src/application/use-cases/user/find-user';
 import { DeleteUser } from 'src/application/use-cases/user/delete-user';
+import { IPaginator } from 'src/helpers/interfaces/paginator-response-interface';
+import { UserModel } from 'src/domain/models/user';
 
 @Controller('user')
 @ApiTags('user')
@@ -37,7 +39,7 @@ export class UsersController {
     @UseGuards(AuthGuard)
     @ApiOperation({ summary: 'FindMany User' })
     @Get('')
-    async findMany(@Query() filter) {
+    async findMany(@Query() filter: IPaginator<UserModel>) {
         const { userPage } = await this.findManyUser.execute({filter});
         // return new UserViewModel(userUpdated);
         return userPage;
